@@ -1,11 +1,12 @@
 # JSF Basics (v2.2)
 
-### Build Tool: Maven
+## Build Tool: Maven
+
 #### Reference Implementations
 * jsf-api.jar
 * jsf-impl.jar
 
-#### Dependencies
+### Dependencies
 ```xml
 <dependencies>
   <dependency>
@@ -41,8 +42,8 @@
  ```
 * JSF allows users to design a complex tree of named POJO Beans. These beans have a predetermined lifespan known as Scope.
 * Beans can be defined using: <br>
-  – Managed Bean Creation facility (faces-config.xml) <br>
-  – Java EE 5 annotations
+  > Managed Bean Creation facility (faces-config.xml) <br>
+  > Java EE 5 annotations
 * Manage Beans also have a lifecycle which depends on their speciefied scope
 
 #### JSF 2 XML based Configuration 
@@ -69,7 +70,7 @@ mixed case starting with lower case
   > @ManagedBean(name=“someName”, eager=true)
 > Note: Make sure you include the correct package ```import javax.faces.bean. ManagedBean;```
 
-#### Bean Scopes
+### Bean Scopes
 * **Application**
   - Lifespan continues as long as the web application is deployed
 * **Session**
@@ -116,7 +117,7 @@ mixed case starting with lower case
   - @NoneScoped
 > Note: make sure to import: ```javax.faces.bean.Xscoped;```
 
-#### Bean Lifecycle
+### Bean Lifecycle
 JSF implementations running in a Java EE 5 compliant container have access to two other annotations:
   - @PostConstruct
   - @PreDestroy
@@ -134,4 +135,56 @@ JSF implementations running in a Java EE 5 compliant container have access to tw
 * Bean scope plays an important role as to when this method is called
 * Can be handy for proactively cleaning up a memory foot print or un-registering a class from a listener
 
+### Expression Language in JSF
 
+#### Introspection
+* Page markup will want to access managed Bean properties
+* JSF uses Java introspection to access Bean properties
+  - Consider the Bean instance variable 'name'<br>
+    ```java
+      private String name
+      public String getName(){...}
+      public void setName(String name){...}
+    ```
+* Boolean instance variables are slightly different
+  ```java 
+    private boolean rendered
+    public boolean isRendered (){...}
+    public void setRendered(boolean name){...}
+  ```
+* For introspection to work correctly the class must have a zero argument constructor
+  > Alternatively no constructors is valid
+* The instance variable isn’t actually needed, set/get or set/is Variable name is all that is needed for introspection to resolve
+* Avoid public instance variables
+  - Introspection won’t call a setter/getter for a public instance variable
+  - This can make debugging more difficult
+* Static instance variables cannot be accessed through introspection
+
+#### Expression Language
+* Bean properties can be exposed to EL expression language
+* Consider the named bean “applicant” with a setter/getter for the property *firstName*
+* JSF expression language for accessing the property looks like this
+  > ```#{applicant.firstName}```
+  
+> Note: The framework calls the getter/setter methods as needed
+* The EL notation **#{}** defers evaluation to runtime
+  - 99% percent of the time this is the syntax you want
+* The EL notation **${}** compile-time (immediate) evaluation
+  - Can offer some page level optimizations in side of looping structures
+* What happens when an expression is evaluated
+  - Bean look-up
+  - Reflective bean property resolution
+
+#### EL Operators
+EL Operators
+* Arithmetic
+  > +, -, *, / (or 'div'), % (or 'mod')
+* Relational
+  > == (or 'eq'), != (or 'ne'), < (or 'lt'), > (or 'gt'), <= (or 'le'), >= ('ge')
+* Logical
+  > && (or 'and'), || (or 'or'), ! (or 'not')
+* Conditional:
+  > A ? B : C
+* Empty
+  > empty (true if variable is null, an zero-length string, array, Map, or Collection) 
+  <br>```#{not empty (mybean.value) and mybean.rendered}```

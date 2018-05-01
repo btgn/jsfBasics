@@ -6,7 +6,7 @@
 * jsf-api.jar
 * jsf-impl.jar
 
-### Dependencies
+### Dependencies (Maven)
 ```xml
 <dependencies>
   <dependency>
@@ -109,13 +109,14 @@ mixed case starting with lower case
 
 #### Scope Configuration (Using Annotations)
 * Scopes can also be defined with annotations
-  - @ApplicationScoped
-  - @SessionScoped
-  - @ViewScoped
-  - @RequestScoped
+  - @ApplicationScoped*
+  - @SessionScoped*
+  - @ViewScoped*
+  - @RequestScoped*
   - @CustomScoped(value="#{someMap}")
   - @NoneScoped
-> Note: make sure to import: ```javax.faces.bean.Xscoped;```
+> Note: make sure to import: ```javax.faces.bean.Xscoped;```<br>
+**Frequently Used Scope Types*
 
 ### Bean Lifecycle
 JSF implementations running in a Java EE 5 compliant container have access to two other annotations:

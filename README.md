@@ -177,7 +177,6 @@ JSF implementations running in a Java EE 5 compliant container have access to tw
   - Reflective bean property resolution
 
 #### EL Operators
-EL Operators
 * Arithmetic
   > +, -, *, / (or 'div'), % (or 'mod')
 * Relational
@@ -189,3 +188,6 @@ EL Operators
 * Empty
   > empty (true if variable is null, an zero-length string, array, Map, or Collection) 
   <br>```#{not empty (mybean.value) and mybean.rendered}```
+
+### Components
+![JSF Component Architecture](https://drive.google.com/open?id=1RzTCNlzJNB0nemGemb_gSBpseqqt_7Ry)

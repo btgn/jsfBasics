@@ -190,4 +190,4 @@ JSF implementations running in a Java EE 5 compliant container have access to tw
   <br>```#{not empty (mybean.value) and mybean.rendered}```
 
 ### Components
-![JSF Component Architecture](https://drive.google.com/open?id=1RzTCNlzJNB0nemGemb_gSBpseqqt_7Ry)
+![JSF Component Architecture](https://github.com/btgn/images/blob/master/JSF-ICEfaces%20Images/Component%20Architecture.JPG)

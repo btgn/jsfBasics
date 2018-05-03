@@ -1,4 +1,4 @@
 <%
-    response.sendRedirect("start.jsf");
+    response.sendRedirect("job-applicant.jsf");
 %>
 

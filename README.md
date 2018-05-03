@@ -7,6 +7,7 @@
 * jsf-impl.jar
 
 ### Dependencies (Maven)
+**pom.xml**
 ```xml
 <dependencies>
   <dependency>
@@ -40,6 +41,18 @@
 
 </dependencies>
  ```
+>All files with extension *.xhtml* have to have the below mentioned syntax in the starting  
+***.xhtml**
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
+</html>
+```
+
 * JSF allows users to design a complex tree of named POJO Beans. These beans have a predetermined lifespan known as Scope.
 * Beans can be defined using: <br>
   > Managed Bean Creation facility (faces-config.xml) <br>
@@ -189,5 +202,122 @@ JSF implementations running in a Java EE 5 compliant container have access to tw
   > empty (true if variable is null, an zero-length string, array, Map, or Collection) 
   <br>```#{not empty (mybean.value) and mybean.rendered}```
 
-### Components
+### Components 
+* Components in JSF are classified into 3 parts:
+  - The Component Class
+  - The Tag Class
+  - The Renderer Class
+
 ![JSF Component Architecture](https://github.com/btgn/images/blob/master/JSF-ICEfaces%20Images/Component%20Architecture.JPG)
+
+* The default JSF components render html (h: namespace)
+* More information on component development will be covered in later lectures
+
+#### JSF Input Components
+* JSF contains a handful of basic components that are equivalent to the HTML 5 elements
+  - <h:form />
+  - <h:inputText />
+  - <h:inputTextarea />
+  - <h:inputSecret />
+  - <h:inputHidden />     
+  - <h:outputLabel />
+  - <h:outputLink />
+  - <h:outputFormat />
+  - <h:outputText />
+
+### Component Tags
+Component tags are placed on JSF pages/views:
+```html 
+  <h:outputText />
+```
+Tag attributes allow developers to customize the appearance and behavior of components:
+```html
+  <h:outputText value=“Hello World” rendered=“true” />
+```
+Tags are nested in a parent-child containment format:
+```html
+  <h:form>
+    <h:outputLabel for=“fullName” />
+    <h:inputText id=“fullName” />
+  </h:form>
+```
+
+#### Form Input Component
+* The form input component is a required parent tag for all input components
+* Any input components in the form tag will be submitted to the server when submit occurs
+```html
+  <h:form />
+    <h:inputText value=“#{bean.userName}”/>
+    ...
+  </h:form/>
+```
+* Form tags can not be embedded but there can be more than one form per page
+
+#### InputText Component
+* Input Text is the same as the *```<input type=“text”/>```* in html 4 allowing client side users to input text
+* The value binding can be of type String, Number and all number primitives. JSF takes care of conversion
+* InputText can be quite powerful when combined with converters, validators and ajax tags which will be explained in more detail later
+
+#### InputTextArea Component
+* InputTextArea is the same as the *```<input type=“textarea”/>```* in html 4 allowing client side users to input text
+* The value binding should be of the type String for the value attribute
+
+#### InputSecret Component
+* InputSecret Text is the same as the *```<input type=“password”/>```* in HTML 4 allowing client to enter hidden or secret text
+* The component attribute autocomplete="off“ is handy for suppressing the form auto complete feature of most modern browsers
+
+#### InputHidden Component
+* Similar to the *```<input type=“hidden”/>```* in HTML 4
+* Allows JSF developers to include hidden form data that will be submitted with the other form elements
+* Not used as often in JSF as in standard HTML as Bean scopes provide more intuitive state saving
+
+#### OutputLabel Component
+* Renders the same output as the HTML 4 *```<label>```* tag
+* Generally used in combination with an input component
+* When the id attribute of an input component matches the for attribute of an outputLabel a fieldset tag will automatically be inserted by the framework
+
+#### OutputLink Component
+* Renders the same output as the HTML 4 *```<a>```* tag
+* Not commonly used in JSF as most developers use framework features that aren’t implicitly supported by this component
+* JSF 2.0 introduced *```<h:link />```* a component that allows developers to use HTTP GET submits instead of the standard JSF POST submits
+
+#### OutputFormat Component
+* Allows developers to use Java i18n message bundles that have specified input parameters
+* This component will be covered in later lectures around message bundles
+* A simple example of its usage:
+```html
+  <h:outputFormat value=”Line number {0} !">
+    <f:param value=”153,44"/>
+  </h:outputFormat>
+```
+#### OutputText Component
+* Renders the same output as the HTML 4 *```<span>```* tag
+* JSF 2.0 EL notation has somewhat reduced the use of the outputText component <br>
+  *```#{myBean.value1}```* is equivalent to *```<h:outputText value=“#{myBean.value1}”/>```*
+* However it is still used when JSF conversion is needed
+
+### Value Binding
+* Bean values are assigned to component attributes using JSF EL syntax
+* For example the managed bean myBean’s instance variable 'value1' is assigned to the input component as follows:
+```html
+  <h:inputText value=“#{myBean.value1}”/>
+  <h:inputText value=“#{myBean.value1}” rendered=“#{myBean.value2}”/>
+```
+
+#### Input Value Binding
+* Input components in JSF require that the bound bean property is mutable :
+```java
+  public void setValue1(Object value1){...}
+  public Object getValue1(){...};
+```
+* If the JSF introspection mechanism can’t find the corresponding setter or getter a run time error will occur
+* All other non “value” attribute bindings can be immutable as the setter method is never called by the JSF framework
+
+### Output Value Binding
+* Output components in JSF assume that the associated value bindings are immutable but it is not a requirement
+```java
+  public Object getValue1(){...};
+```
+* If the JSF introspection mechanism can’t find the corresponding getter a run time error will occur
+* All non “value” component attribute bindings can be immutable as the setter method is never called by the JSF framework
+

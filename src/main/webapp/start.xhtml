@@ -2,57 +2,46 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view />
+<f:view/>
 
 <h:head>
-	<title>JSF 2.2: Sample Application</title>
+    <title>JSF 2.0: Sample Application</title>
 </h:head>
 
 <h:body>
 
-	<h:form id="simpleForm">
+    <h:form id="simpleForm">
 
-		<h2>JSF 2.2: Sample Application</h2>
-		<p>Hello World!</p>
-		<p>
-			Server Name: #{request.serverName}<br /> Context Path:
-			#{request.contextPath}<br /> Servlet Path: #{request.servletPath}<br />
-			Server Port: #{request.serverPort}<br /> Request Method:
-			#{request.method}<br /> Server Info: #{application.serverInfo}<br />
-			Session ID: #{session.id}<br />
-		</p>
+        <h2>
+            JSF 2.0: Sample Application
+        </h2>
 
-		<h3>Bean Scopes:</h3>
-		<ul>
-			<!-- The object stamp value will be the same irrespective of the number of instances open (Browser or Browser Tabs) -->
-			<li> Application Scope: #{applicantController} </li>
+        <p>Bean Scopes:</p>
 
-			<!-- The object stamp value will be the same in the same Browser including multiple tabs but will change 
-					if opened in a different browser -->
-			<li> Session Scope: #{viewProperties} </li>
+        <ul>
+            <li>Application: #{application}</li>
+            <li>Session: #{viewProperties}</li>
+            <li>View: #{jobApplicant}</li>
+            <li>Request: #{requestTest}</li>
+        </ul>
+        <h:commandButton value="Submit" />
 
-			<!-- The object stamp value changes every time the page is refreshed or 
-					even if the page is loaded in a different tab or a browser
-					 -->
-			<li> View Scope: #{jobApplicant} </li>
-			
-			<!-- The object stamp value changes only when a request is made 
-					EX: when the form is submitted, only the request object stamp is changed but not the view stamp -->
-			<li> Request Scope: #{requestTest} </li>
-			
-		</ul>
+        <p>
+            Server Name: #{request.serverName}<br />
+            Context Path: #{request.contextPath}<br />
+            Servlet Path: #{request.servletPath}<br />
+            Server Port: #{request.serverPort}<br />
+            Request Method: #{request.method}<br />
+            Server Info: #{application.serverInfo}<br />
+            Session ID: #{session.id}<br />
+        </p>
 
-
-
-
-	<h:commandButton value="Submit"/>
-	</h:form>
-	
+    </h:form>
 
 </h:body>
 
-</html>
+</html>  

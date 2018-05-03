@@ -5,14 +5,15 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name="viewProperties")
+/**
+ * View model
+ */
+@ManagedBean
 @SessionScoped
 public class ViewProperties implements Serializable{
 
-	@Override
-	public String toString() {
-		return "viewProperties "
-				+ super.toString();
-	}
-
+    @Override
+    public String toString(){
+        return "viewProperties " + super.toString();
+    }
 }

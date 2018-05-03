@@ -1,21 +1,17 @@
 package model;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name="requestTest")
+/**
+ * Request scope test bean
+ */
+@ManagedBean
 @RequestScoped
-public class RequestTest implements Serializable {
+public class RequestTest {
 
-	@Override
-	public String toString() {
-		return "RequestTest "
-				+ super.toString();
-	}
-	
-	
-
+    @Override
+    public String toString(){
+        return "requestTest " + super.toString();
+    }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+<h:head></h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel for="title" value="Title: " />
+				<h:selectOneRadio id="title" value="#{jobApplicant.title}">
+					<f:selectItem itemLabel="Dr." itemValue="Dr." />
+					<f:selectItem itemLabel="Ms." itemValue="Ms." />
+					<f:selectItem itemLabel="Mrs." itemValue="Mrs." />
+					<f:selectItem itemLabel="Miss" itemValue="Miss" />
+					<f:selectItem itemLabel="Mr." itemValue="Mr." />
+				</h:selectOneRadio>
+
+				<h:outputLabel for="firstName" value="First Name: "></h:outputLabel>
+				<h:inputText id="firstName" value="#{jobApplicant.firstName}"></h:inputText>
+
+				<h:outputLabel for="lastName" value="Last Name: "></h:outputLabel>
+				<h:inputText id="lastName" value="#{jobApplicant.lastName}"></h:inputText>
+
+
+				<h:outputLabel for="country" value="Country: " />
+				<h:selectOneMenu id="country" value="#{jobApplicant.country}">
+					<f:selectItem itemLabel="-Select-" noSelectionOption="true" />
+					<f:selectItems value="#{countryList.countries}" />
+				</h:selectOneMenu>
+			</h:panelGrid>
+
+
+			<h:commandButton value="Submit"></h:commandButton>
+
+		</h:form>
+
+		
+		- Server - 
+		<br/>
+		Title: <h:outputText value="#{jobApplicant.title}" />
+		<br/>
+		First Name: <h:outputText value="#{jobApplicant.firstName}" />
+		<br/>
+		Last Name: <h:outputText value="#{jobApplicant.lastName}" />
+		<br/>
+		Country: <h:outputText value="#{jobApplicant.country}" />
+		<br/>
+
+	</h:body>
+
+
+</html>

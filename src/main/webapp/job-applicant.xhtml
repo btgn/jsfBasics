@@ -7,52 +7,83 @@
 
 
 
-<h:head></h:head>
-	<h:body>
-		<h:form>
-			<h:panelGrid columns="2">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 
-				<h:outputLabel for="title" value="Title: " />
-				<h:selectOneRadio id="title" value="#{jobApplicant.title}">
-					<f:selectItem itemLabel="Dr." itemValue="Dr." />
+</h:head>
+<h:body>
+	<div class="container">
+		<h:form>
+			<h:panelGrid columns="3" cellpadding="10" cellspacing="60">
+
+				<h:outputLabel for="title" value="#{msgs.title}" />
+				<h:selectOneRadio id="title" required="true"
+					value="#{jobApplicant.title}">
+					<f:selectItem itemLabel="Mr." itemValue="Mr." />
 					<f:selectItem itemLabel="Ms." itemValue="Ms." />
 					<f:selectItem itemLabel="Mrs." itemValue="Mrs." />
 					<f:selectItem itemLabel="Miss" itemValue="Miss" />
-					<f:selectItem itemLabel="Mr." itemValue="Mr." />
+					<f:selectItem itemLabel="Dr." itemValue="Dr." />
 				</h:selectOneRadio>
+				<h:message for="title"></h:message>
 
-				<h:outputLabel for="firstName" value="First Name: "></h:outputLabel>
-				<h:inputText id="firstName" value="#{jobApplicant.firstName}"></h:inputText>
+				<h:outputLabel for="firstName" value="#{msgs.firstName}"></h:outputLabel>
+				<h:inputText class="form-control" id="firstName" required="true"
+					value="#{jobApplicant.firstName}" converter="wordCapitalization"></h:inputText>
+				<h:message for="firstName"></h:message>
 
-				<h:outputLabel for="lastName" value="Last Name: "></h:outputLabel>
-				<h:inputText id="lastName" value="#{jobApplicant.lastName}"></h:inputText>
+				<h:outputLabel for="lastName" value="#{msgs.lastName}"></h:outputLabel>
+				<h:inputText class="form-control" id="lastName" required="true"
+					value="#{jobApplicant.lastName}" converter="wordCapitalization"></h:inputText>
+				<h:message for="lastName"></h:message>
 
+				<h:outputLabel for="email" value="#{msgs.email}"></h:outputLabel>
+				<h:inputText class="form-control" id="email" required="true"
+					value="#{jobApplicant.email}" validator="emailValidator"></h:inputText>
+				<h:message for="email"></h:message>
 
-				<h:outputLabel for="country" value="Country: " />
-				<h:selectOneMenu id="country" value="#{jobApplicant.country}">
+				<h:outputLabel for="country" value="#{msgs.country}" />
+				<h:selectOneMenu class="form-control" id="country" required="true"
+					value="#{jobApplicant.country}">
 					<f:selectItem itemLabel="-Select-" noSelectionOption="true" />
 					<f:selectItems value="#{countryList.countries}" />
 				</h:selectOneMenu>
+				<h:message for="country"></h:message>
+
+				<h:outputLabel for="salary" value="#{msgs.salary}" />
+				<h:inputText class="form-control" id="salary" required="true"
+					value="#{jobApplicant.salary}">
+					<f:convertNumber type="currency" integerOnly="true"></f:convertNumber>
+					<f:validateLongRange minimum="100" maximum="1000000" />
+				</h:inputText>
+
+				<h:message for="salary"></h:message>
 			</h:panelGrid>
 
 
-			<h:commandButton value="Submit"></h:commandButton>
+			<h:commandButton value="#{msgs.submit}" class="btn btn-success center"
+				actionListener="#{jobApplicant.submit}"></h:commandButton>
 
 		</h:form>
+		<h:messages globalOnly="true" />
 
-		
-		- Server - 
-		<br/>
+		<div class="container sm">
+			<center>Server</center>
+			<h:panelGrid columns="2" cellpadding="10">
 		Title: <h:outputText value="#{jobApplicant.title}" />
-		<br/>
+
 		First Name: <h:outputText value="#{jobApplicant.firstName}" />
-		<br/>
+
 		Last Name: <h:outputText value="#{jobApplicant.lastName}" />
-		<br/>
+
 		Country: <h:outputText value="#{jobApplicant.country}" />
-		<br/>
 
-	</h:body>
+		Salary: <h:outputText value="#{jobApplicant.salary}" />
+			</h:panelGrid>
+		</div>
 
+	</div>
+</h:body>
 
 </html>

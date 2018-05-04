@@ -1,3 +1,9 @@
 /controller/
+/lifecycle/
 /model/
 /sample/
+/validators/
+/converter/
+/Msgs_en.properties
+/JSF-ovverride_en.properties
+/resources/

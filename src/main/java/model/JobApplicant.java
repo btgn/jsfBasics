@@ -2,8 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,52 +16,45 @@ import lombok.Setter;
  */
 @ManagedBean
 @ViewScoped
-public class JobApplicant implements Serializable{
+public class JobApplicant implements Serializable {
 
+	@Getter
+	@Setter
 	private String firstName;
+	
+	@Getter
+	@Setter
 	private String lastName;
-	private String title;
+	
+	@Getter
+	@Setter
+	private Integer title;
+	
+	@Getter
+	@Setter
 	private String country;
 	
+	@Getter
+	@Setter
+	private String email;
+	
+	@Getter
+	@Setter
+	private int salary;
+
 	@Override
-    public String toString(){
-        return "jobApplicant " + super.toString();
-    }
-	
-    public String getFirstName() {
-		return firstName;
+	public String toString() {
+		return "jobApplicant " + super.toString();
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void submit(ActionEvent ae) {
+		if (firstName.equals("John") && lastName.equals("Doe")) {
+			String msg = "John Doe already works for us";
+			FacesMessage facesMessage = new FacesMessage(msg);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String clientId = null; // this is a global message
+			facesContext.addMessage(clientId, facesMessage);
+		}
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getTitle() {
-		System.out.println(title);
-		return title;
-		
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}	
-	
-	
-	
 }

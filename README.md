@@ -146,6 +146,7 @@ mixed case starting with lower case
 #### Scope Configuration (Using XML)
 * Once a Bean is defined in the faces-config.xml or via an Annotation it has a default of request scope
 * Bean scope can be defined explicitly in the faces-config.xml
+
 ```xml
 <managed-bean>
   <managed-bean-name>

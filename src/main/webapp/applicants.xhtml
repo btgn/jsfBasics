@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head></h:head>
+
+<h:body>
+    <!--<h:form>-->
+    <ui:composition template="/WEB-INF/templates/template.xhtml" >
+        <ui:param name="title" value="Applicant System" />
+        <ui:define name="header">
+            <h:graphicImage library="images" name="icefaces.png" styleClass="img"/>
+            <h:outputStylesheet library="css" name="bootstrap.min.css"> </h:outputStylesheet>
+            <h:outputStylesheet library="css" name="styles.css"> </h:outputStylesheet>
+
+        </ui:define>
+        <ui:define name="menu">
+            <h:button outcome="job-applicant" styleClass="btn btn-link"
+                      value="Job Applicant Page" />
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+                <h:dataTable value="#{applicants.applicantList}"
+                             var="row">
+                    <h:column>
+                        <f:facet name="header">FIRST NAME</f:facet>
+                        <h:outputText value="#{row.firstName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">LAST NAME</f:facet>
+                        <h:outputText value="#{row.lastName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">EMAIL ADDRESS</f:facet>
+                        <h:outputText value="#{row.email}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">COUNTRY</f:facet>
+                        <h:outputText value="#{row.country}" />
+                    </h:column>
+                </h:dataTable>
+                <h:commandLink action="job-applicant.jsf" styleClass="btn btn-link" value="return to previous page"></h:commandLink>
+            </h:form>
+        </ui:define>
+        <ui:define name="footer">
+            <div class="cntr">
+                - Server -<br />
+                Applicants: <h:outputText value="#{applicants.applicantList}"/><br />
+            </div>
+        </ui:define>
+    </ui:composition>
+
+    <!--
+    </h:form>
+    <br />
+    - Server -<br />
+    Applicants: <h:outputText value="#{applicants.applicantList}" /><br />
+-->
+</h:body>
+
+</html>

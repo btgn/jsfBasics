@@ -14,7 +14,7 @@ public class WordCapitalizationConverter implements Converter {
 		return fixCapitalization(value);
 	}
 
-	@SuppressWarnings("unused")
+
 	private String fixCapitalization(String value) {
 		if(!value.isEmpty()) {
 			String str = value.substring(0, 1);
